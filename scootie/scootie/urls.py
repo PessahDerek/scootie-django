@@ -26,6 +26,7 @@ router = routers.DefaultRouter()
 router.register(r'bikes', bike_views.BikeViewSet)
 router.register(r'category', bike_views.CategoryViewSet)
 router.register(r'content', content_views.ContentViewSet)
+router.register(r'reviews', content_views.ReviewsViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

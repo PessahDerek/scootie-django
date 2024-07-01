@@ -7,14 +7,18 @@ from django.db import models
 class BikeCategory(models.Model):
     category = models.CharField(max_length=50)
 
+    def __get__(self, instance, owner):
+        instance.bikes = Bike.objects.filter(category=self.category)
+        return instance
+
     def __str__(self):
-        return self.category
+        return self.category + f" :{len(self.bikes.all())}"
 
 
 class Bike(models.Model):
     brand = models.CharField(max_length=50)
     model = models.CharField(max_length=50)
-    category = models.ForeignKey(BikeCategory, on_delete=models.CASCADE)
+    category = models.ForeignKey(BikeCategory, related_name='bikes', on_delete=models.CASCADE)
     frame = models.CharField(max_length=50)
     image1 = models.ImageField(upload_to='bike_images', null=False, blank=False, default="")
     image2 = models.ImageField(upload_to='bike_images', null=True, blank=True)
@@ -44,7 +48,6 @@ class Bike(models.Model):
 
     def __str__(self):
         return f"{self.brand} {self.model}"
-
 
 # class BikeImages(models.Model):
 #     src = models.ImageField(upload_to='bike_images/')

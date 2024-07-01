@@ -5,4 +5,3 @@ from content.models import Content
 
 admin.site.register(BikeCategory)
 admin.site.register(Bike)
-admin.site.register(Content)
