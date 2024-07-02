@@ -27,6 +27,9 @@ router.register(r'bikes', bike_views.BikeViewSet)
 router.register(r'category', bike_views.CategoryViewSet)
 router.register(r'content', content_views.ContentViewSet)
 router.register(r'reviews', content_views.ReviewsViewSet)
+router.register(r'videos', content_views.VideoViewSet)
+router.register(r'faqs', content_views.FaqViewSet)
+router.register(r'contacts', content_views.ContactViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

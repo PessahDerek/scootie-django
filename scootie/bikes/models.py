@@ -14,13 +14,16 @@ class BikeCategory(models.Model):
     def __str__(self):
         return self.category + f" :{len(self.bikes.all())}"
 
+    class Meta:
+        ordering = ['id']
+
 
 class Bike(models.Model):
     brand = models.CharField(max_length=50)
     model = models.CharField(max_length=50)
     category = models.ForeignKey(BikeCategory, related_name='bikes', on_delete=models.CASCADE)
     frame = models.CharField(max_length=50)
-    image1 = models.ImageField(upload_to='bike_images', null=False, blank=False, default="")
+    image1 = models.ImageField(upload_to='bike_images', null=False, blank=False)
     image2 = models.ImageField(upload_to='bike_images', null=True, blank=True)
     image3 = models.ImageField(upload_to='bike_images', null=True, blank=True)
     image4 = models.ImageField(upload_to='bike_images', null=True, blank=True)

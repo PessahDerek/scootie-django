@@ -25,7 +25,9 @@ SECRET_KEY = 'django-insecure-jb*e7=9g#di-p6w0ze60^-i(2fvujl_md%lvs&)r1u1%#8lubc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "192.168.100.76"
+]
 
 
 # Application definition
@@ -136,6 +138,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 20
 }
 
