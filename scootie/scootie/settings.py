@@ -26,6 +26,7 @@ SECRET_KEY = 'django-insecure-jb*e7=9g#di-p6w0ze60^-i(2fvujl_md%lvs&)r1u1%#8lubc
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    "pixystix.pythonanywhere.com",
     "192.168.100.76"
 ]
 
