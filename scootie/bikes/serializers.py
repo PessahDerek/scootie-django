@@ -14,6 +14,7 @@ class BikeCategoryNameSerializer(serializers.ModelSerializer):
 
 class BikeSerializer(serializers.HyperlinkedModelSerializer):
     category = BikeCategoryNameSerializer(read_only=True)
+    id = serializers.ReadOnlyField()
 
     class Meta:
         model = Bike

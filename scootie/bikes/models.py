@@ -1,5 +1,3 @@
-import this
-
 from django.db import models
 
 
@@ -51,6 +49,9 @@ class Bike(models.Model):
 
     def __str__(self):
         return f"{self.brand} {self.model}"
+
+    class Meta:
+        ordering = ['category']
 
 # class BikeImages(models.Model):
 #     src = models.ImageField(upload_to='bike_images/')

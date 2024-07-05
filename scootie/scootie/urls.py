@@ -20,6 +20,7 @@ from django.conf.urls.static import static
 from rest_framework import routers
 from bikes import views as bike_views
 from content import views as content_views
+from cart import views as cart_views
 from scootie import settings
 
 router = routers.DefaultRouter()
@@ -30,9 +31,11 @@ router.register(r'reviews', content_views.ReviewsViewSet)
 router.register(r'videos', content_views.VideoViewSet)
 router.register(r'faqs', content_views.FaqViewSet)
 router.register(r'contacts', content_views.ContactViewSet)
+router.register(r'cart', cart_views.CartViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('bikes/<category>', bike_views.BikeViewSet.as_view({'get': 'retrieve'})),
     path('admin/', admin.site.urls),
 ]
 
