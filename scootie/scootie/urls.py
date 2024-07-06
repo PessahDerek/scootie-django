@@ -31,7 +31,7 @@ router.register(r'reviews', content_views.ReviewsViewSet)
 router.register(r'videos', content_views.VideoViewSet)
 router.register(r'faqs', content_views.FaqViewSet)
 router.register(r'contacts', content_views.ContactViewSet)
-router.register(r'cart', cart_views.CartViewSet)
+router.register(r'cart', cart_views.CartViewSet, basename='cart')
 
 urlpatterns = [
     path('', include(router.urls)),

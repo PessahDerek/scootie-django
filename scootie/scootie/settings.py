@@ -42,9 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'ckeditor',
+    'cart',
     'bikes',
     'content',
-    'cart'
 ]
 
 MIDDLEWARE = [
@@ -58,7 +58,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
-# TODO: restrict
+# TODO: restrict in production
 CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'scootie.urls'
@@ -79,6 +79,15 @@ TEMPLATES = [
     },
 ]
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+# TODO: use .env in production
+EMAIL_HOST_USER = '3b6c87fc5e956b'
+EMAIL_HOST_PASSWORD = 'f11f5cef632c6d'
+EMAIL_USE_SSL = False  # TODO: Set to true in production
+
 WSGI_APPLICATION = 'scootie.wsgi.application'
 
 
@@ -91,7 +100,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

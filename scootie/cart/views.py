@@ -1,47 +1,54 @@
+from os.path import join
+
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 from rest_framework import viewsets, status
 from rest_framework.response import Response
+from django.core.mail import send_mail
 
-from .models import Cart, Client, CartItem
 from bikes.models import Bike
-from .serializers import CartSerializer, ClientSerializer
+from scootie import settings
 
 
-# Create your views here.
 class CartViewSet(viewsets.ModelViewSet):
-    queryset = Cart.objects.all()
-    model = Cart
-    serializer_class = CartSerializer
 
-    # @action(methods=['POST'], detail=False, name="send-email", url_path="")
+    def get_queryset(self):
+        pass
+
     def create(self, request, *args, **kwargs):
-        items = []
-        for item in request.data['items']:
-            try:
-                bike = Bike.objects.get(id=item['id'])
-                new_item = CartItem.objects.create(
-                    brand=item['brand'], model=item['model'],
-                    price=bike.price, discount=bike.discount,
-                    qty=item['qty'], bike_id=bike.id
-                )
-                items.append(new_item.id)
-            except Exception as e:
-                print(e)
-                return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
         try:
-            found_client = Client.objects.get(phone=request.data['client']['phone'])
-        except Client.DoesNotExist:
-            found_client = Client.objects.create(
-                phone=request.data['client']['phone'], first_name=request.data['client']['first_name'],
-                last_name=request.data['client']['last_name'], email=request.data['client']['email']
+            print(request.data)
+            client = request.data['client']
+            items = []
+            for item in request.data['items']:
+                try:
+                    found = Bike.objects.get(id=item['id'])
+                    subtotal = item['qty']*(found.discount if found.discount > 0 else found.price)
+                    items.append(
+                        {'brand': found.brand, 'model': found.model, 'price': found.price, 'discount': found.discount,
+                         "qty": item['qty'], 'subtotal': subtotal})
+                except Bike.DoesNotExist:
+                    continue
+            # html = ""
+            # with open(join(settings.BASE_DIR, 'templates', 'order.html')) as f:
+            #     html = f.read()
+            # html = join(settings.BASE_DIR, 'templates', 'order.html')
+            # html_out = render_to_string('scootie', {'client': client, 'items': items}),
+            send_mail(
+                subject="Order received",
+                # html_message=html_out,
+                from_email=settings.EMAIL_HOST_USER,
+                recipient_list=[settings.EMAIL_HOST_USER, client['email']],
+                fail_silently=False,
+                message="wtf"
             )
-        request.data['client'] = found_client.id
-        request.data['items'] = items
-        print("id: ", request.data['client'])
-        new_cart_item = super().create(request, *args, **kwargs)
-        return Response(status=status.HTTP_201_CREATED)
+        except Exception as e:
+            print("Fuck: ", e)
+            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'message': 'welp'}, status=status.HTTP_201_CREATED)
 
-
-class ClientViewSet(viewsets.ModelViewSet):
-    queryset = Client.objects.all()
-    model = Client
-    serializer_class = ClientSerializer
+    # Function to send confirmation email with cart details (implementation required)
+    def send_cart_confirmation_email(self, cart):
+        # Implement logic to send email with cart details like customer info,
+        # item details (brand, model, price, discount, quantity) and total cost
+        pass
