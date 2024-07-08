@@ -40,7 +40,7 @@ class Bike(models.Model):
     battery_type = models.CharField(max_length=50)
     tyre_size = models.CharField(max_length=50)
     carton = models.CharField(max_length=50)
-    description = models.CharField(max_length=2000)
+    description = models.TextField(max_length=2000)
     stock = models.IntegerField()
     net_weight = models.FloatField()
     gross_weight = models.FloatField()

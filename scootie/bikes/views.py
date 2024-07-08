@@ -16,7 +16,7 @@ class BikeViewSet(viewsets.ModelViewSet):
     serializer_class = BikeSerializer
     pagination_class = CustomPagination
 
-    @action(methods=['GET'], detail=False, url_name='by-category', url_path="by-category")
+    @action(methods=['GET'], detail=False, url_name='by-category-page', url_path="by-category-page")
     def by_category(self, request, pk=None):
         """
         Get bikes filtered by category

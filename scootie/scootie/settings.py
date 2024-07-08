@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -27,9 +26,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     "pixystix.pythonanywhere.com",
-    "192.168.100.76"
+    "192.168.100.76",
+    "e068c9c71dd95c8bf5574d638370a996.serveo.net",
+    "localhost"
 ]
-
+CSRF_TRUSTED_ORIGINS = [
+    "https://e068c9c71dd95c8bf5574d638370a996.serveo.net"
+]
 
 # Application definition
 
@@ -66,7 +69,10 @@ ROOT_URLCONF = 'scootie.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            # os.path.join(BASE_DIR, '/templates/'),
+            BASE_DIR/'templates/',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -79,6 +85,7 @@ TEMPLATES = [
     },
 ]
 
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
 EMAIL_PORT = 587
@@ -90,14 +97,21 @@ EMAIL_USE_SSL = False  # TODO: Set to true in production
 
 WSGI_APPLICATION = 'scootie.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'scootie',
+        'USER': 'apps',
+        'PASSWORD': 'Devderek1234##',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -120,7 +134,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -131,7 +144,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
@@ -152,4 +164,3 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'libs.paginator.CustomPagination',
     'PAGE_SIZE': 20
 }
-

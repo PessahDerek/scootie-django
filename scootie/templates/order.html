@@ -22,7 +22,7 @@
 </head>
 <body>
 <h1>Order Confirmation</h1>
-<p>Dear {{ first_name }},</p>
+<p>Dear {{ client.first_name }},</p>
 <p>Thank you for your order. We have received it and will process it shortly.</p>
 <h2>Order Details:</h2>
 <table>
@@ -33,9 +33,9 @@
         <th>ID</th>
         <th>Color</th>
         <th>Original Price</th>
-        <th>Discount</th>
+        <th>Discounted price</th>
         <th>Quantity</th>
-        <th>Subtotal (calculated in Python)</th>
+        <th>Subtotal</th>
     </tr>
     </thead>
     <tbody>
@@ -45,10 +45,10 @@
             <td>{{ item.model }}</td>
             <td>{{ item.id }}</td>
             <td></td>
-            <td>${{ item.price|floatformat:2 }}</td>
-            <td>{{ item.discount }}%</td>
+            <td>Ksh.{{ item.price|floatformat:2 }}</td>
+            <td>Ksh.{{ item.discount }}%</td>
             <td>{{ item.qty }}</td>
-            <td>${{ item.subtotal }}</td>
+            <td>Ksh.{{ item.subtotal }}</td>
         </tr>
     {% endfor %}
     </tbody>

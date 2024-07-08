@@ -35,7 +35,8 @@ router.register(r'cart', cart_views.CartViewSet, basename='cart')
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('bikes/<category>', bike_views.BikeViewSet.as_view({'get': 'retrieve'})),
+    path('bikes/by-category-page/<category>/<page>/', bike_views.BikeViewSet.by_category),
+    # path('bikes/<category>/', bike_views.BikeViewSet.as_view({'get': 'retrieve'})),
     path('admin/', admin.site.urls),
 ]
 
