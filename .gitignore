@@ -1,3 +1,5 @@
 /env
 /**/.idea
+/scootie/migrations
+/scootie/__pycache__
 
