@@ -112,7 +112,8 @@ DATABASES = {
         'NAME': 'PixyStix$default',
         'USER': 'apps',
         'PASSWORD': 'DevDerek1738',
-        'HOST': 'localhost',
+        # 'HOST': 'localhost',
+        'HOST': 'PixyStix.mysql.pythonanywhere-services.com',
         'PORT': '3306',
     }
 }
