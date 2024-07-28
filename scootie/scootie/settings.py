@@ -27,11 +27,12 @@ DEBUG = True
 ALLOWED_HOSTS = [
     "pixystix.pythonanywhere.com",
     "192.168.100.76",
-    "e068c9c71dd95c8bf5574d638370a996.serveo.net",
+    "852efed9db358e42af732634dc183a58.serveo.net",
     "localhost"
 ]
 CSRF_TRUSTED_ORIGINS = [
-    "https://e068c9c71dd95c8bf5574d638370a996.serveo.net"
+    "https://852efed9db358e42af732634dc183a58.serveo.net",
+    "https://scootie.vercel.app"
 ]
 
 # Application definition
@@ -107,9 +108,10 @@ DATABASES = {
     # }
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'scootie',
+        # 'NAME': 'scootie',
+        'NAME': 'PixyStix$default',
         'USER': 'apps',
-        'PASSWORD': 'Devderek1234##',
+        'PASSWORD': 'DevDerek1738',
         'HOST': 'localhost',
         'PORT': '3306',
     }
